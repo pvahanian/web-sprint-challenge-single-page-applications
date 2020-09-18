@@ -24,7 +24,7 @@ const intialOrder = {
 const intialErrors = {
   name: '', 
   special: '',
-  size: '',
+  size: 'Please select size',
 }
 const initialDisabled = true 
 
@@ -41,8 +41,6 @@ const App = () => {
         setOrder(intialOrder)
       })
       .catch(err => {
-        debugger // eslint-disable-line
-        console.log(err)
       })
   }
 
@@ -52,12 +50,13 @@ const App = () => {
       // we can then run validate using the value
       .validate(value)
       // if the validation is successful, we can clear the error message
-      .then(valid => { // eslint-disable-line
-        setOrderErrors({
-          ...orderErrors,
-          [name]: ""
-        })
+      .then(valid => { 
+        setOrderErrors({...orderErrors,[name]: ""})
       })
+      .catch(err=>
+        {
+          setOrderErrors({...orderErrors, [name]:err.message}) // This will throw the error that is 
+        })
     }
       const inputChange = (name, value) => {
         // 🔥 STEP 10- RUN VALIDATION WITH YUP

@@ -20,7 +20,7 @@ const Order = (props) => {
 
 
     const {disabled,values, submit,change,errors} = props
-
+    console.log(errors)
 const onSubmit = evt => {
     evt.preventDefault()
     submit()
@@ -33,7 +33,8 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
 }
 
     return (
-    <div className="ordertaker">
+    <div className="container">
+    <div className="orderTaker">
     <h2>Build your own Pizza</h2>
     <div className="orderform">
         {/* 🔥 Name input */}
@@ -49,7 +50,7 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
             </label>    
         <h3>Choose your Size</h3>
         {/* 🔥 Error needs to be implemented here */}
-    <div>{errors.size}</div>
+        <div>{errors.size}</div>
         <label>Size
             {/* 🔥 Size dropdown*/}
             <select name='size' value={values.size} onChange={onChange}>
@@ -101,6 +102,7 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
     <div></div>
     <div></div>
     <h3>Special instructions</h3>
+        <div>{errors.special}</div>
         <label>Special
                 <input
                 value={values.special}
@@ -113,15 +115,32 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
         <div  className='submit'>
         <button disabled={disabled} id='submitBtn'>Submit</button> 
         </div>
+
+
     </div>
+    <div className ='displayorder'>
+        <h2>Your current order so far</h2>
+    <h3>Name {values.name}</h3>
+    <h3>Size {values.size}</h3>
+    <h3>Toppings {values.cheese 
+                 ?" Extra Cheese ":" "
+                 }
+                 {values.pineapple 
+                 ?" Pineapple ":" "
+                 }{values.peppers 
+                 ?" Peppers ":" "
+                 }{values.mushrooms 
+                 ?" Mushrooms ":" "
+                 }</h3>
+    <h3>Special Instructions {values.special}</h3>
+    </div>    
+    </div>
+   
+
+
 );
 
 };
 export default Order;
 
 
-
-{/* 
-            <div>{errors.email}</div>
-            <div>{errors.password}</div>
-            <div>{errors.service}</div> */}
