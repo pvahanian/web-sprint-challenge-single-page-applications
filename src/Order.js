@@ -3,17 +3,35 @@ import React, { useState, useEffect } from 'react';
 import { Route, Link, Switch } from "react-router-dom";
 import Pizza from "./Pizza";
 
-const values={
+// Delete 6 thru 15 once all props are being brought in
 
-}
-const onChange=null;
-const errors={
-    size:"REQUIRED!",
-    name:"REQUIRED!"
-}
-const disabled= null;
+// const onChange=null;
+// const errors={
+//     size:"REQUIRED!",
+//     name:"REQUIRED!"
+// }
+// const disabled= null;
 
-const Order = () => {
+
+
+
+
+const Order = (props) => {
+
+
+    const {disabled,values, submit,change,errors} = props
+
+const onSubmit = evt => {
+    evt.preventDefault()
+    submit()
+}
+
+const onChange = evt => { //If the value of the target (typed or selected) changes send it to the change function to update state
+    const{name, value ,type, checked} = evt.target
+    const valueToUse = type === 'checkbox'? checked : value // this checks to see if the type=checkbox type then send checked else send value
+    change(name, valueToUse) 
+}
+
     return (
     <div className="ordertaker">
     <h2>Build your own Pizza</h2>
