@@ -7,7 +7,7 @@ name: yup.string()
 special: yup.string()
     .min(8, 'Please enter at least 8 characters'),
 size: yup.string()
-    .oneOf(['small', 'medium', 'large'], 'Size is required'),
+    .oneOf(['Small', 'Medium', 'Large'], 'Size is required'),
 mushrooms: yup.string(),
 cheese: yup.string(),
 peppers: yup.string(),

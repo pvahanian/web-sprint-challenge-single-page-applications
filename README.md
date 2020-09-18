@@ -44,8 +44,8 @@ this will go through the entire experince of the user with as many cases as poss
 - [X] Add your team lead as collaborator on Github
 - [X] Clone your OWN version of the repository (Not Lambda's by mistake!)
 - [X] Create a new branch: `git checkout -b <firstName-lastName>`
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
-- [ ] Push commits: `git push origin <firstName-lastName>`
+- [X] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
+- [X] Push commits: `git push origin <firstName-lastName>`
 
 ### Task 2: Project Requirements
 
@@ -54,7 +54,7 @@ Your finished project must include all of the following requirements:
 - [X] A homepage that has a "/" route and links to your form (button, nav bar, or any other type of link is acceptable)
 - [X] A form with a "/pizza" route
 - [X] A name text input field
-- [ ] Validation for name - name must be at least 2 characters
+- [X] Validation for name - name must be at least 2 characters
 - [X] A dropdown for pizza size
 - [X] A checklist for toppings - at least 4 (hint: name each separately!)
 - [X] Text input for special instructions
@@ -64,8 +64,8 @@ Your finished project must include all of the following requirements:
 
 Implement the following tests in Cypress:
 
-- [ ] test that you can add text to the box
-- [ ] test that you can select multiple toppings
+- [x] test that you can add text to the box
+- [X] test that you can select multiple toppings
 - [ ] test that you can submit the form
 
 In your solution, it is essential that you follow best practices and produce clean and professional results. You will be scored on your adherence to proper code style and good organization. Schedule time to review, refine, and assess your work and perform basic professional polishing including spell-checking and grammar-checking on your work. It is better to submit a challenge that meets MVP than one that attempts too much and does not.

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-
 import { Route, Link, Switch } from "react-router-dom";
 import Pizza from "./Pizza";
 import Order from './Order'
@@ -27,9 +26,10 @@ const intialErrors = {
   size: 'Please select size',
 }
 const initialDisabled = true 
+const testEmpty=[]
 
 const App = () => {
-  const [completeOrder, setCompleteOrder] = useState([])
+  const [completeOrder, setCompleteOrder] = useState(testEmpty)
   const [order, setOrder] = useState(intialOrder) 
   const [orderErrors, setOrderErrors] = useState(intialErrors) 
   const [disabled, setDisabled] = useState(initialDisabled)       // boolean
@@ -37,8 +37,8 @@ const App = () => {
   const postPizza = pizzaOrder => {
       axios.post("https://reqres.in/api/users", pizzaOrder)
       .then(res => {
-        setCompleteOrder([...order, res.data]) // do not do this on auto
-        setOrder(intialOrder)
+      setCompleteOrder([...completeOrder, res.data]) 
+      setOrder(intialOrder)
       })
       .catch(err => {
       })
@@ -67,17 +67,19 @@ const App = () => {
         })
     }
     
-    const formSubmit = () => {
+const formSubmit = () => {
+
       const newCompleteOrder = {
         name: order.name.trim(),
         size: order.size.trim(),
         special: order.special.trim(),
-        mushrooms: order.mushrooms.trim(),
-        peppers: order.peppers.trim(),
-        pineapple: order.pineapple.trim(),
-        cheese: order.cheese.trim(),
+        mushrooms: order.mushrooms,
+        peppers: order.peppers,
+        pineapple: order.pineapple,
+        cheese: order.cheese,
       }
        postPizza(newCompleteOrder)
+      
     }
 
     useEffect(() =>{                  // This hook takes use to Yup page with schema and validates our info as well as enables submit button
@@ -88,10 +90,8 @@ const App = () => {
       
     },[order])  
 
-
    return (
 
-  
 
   <div>
     <nav>
@@ -110,11 +110,12 @@ const App = () => {
         change={inputChange}   //Sends our callback function inputChange as 'change' so we can use state to update formvalues one at a time
         submit={formSubmit}    //sends callback submitform as 'submit' 
         disabled={disabled}    //Sends the value of disabled which should be true until all values are validated
-        errors={orderErrors}    //Sends the formsErrors as errors to be able to log the errors near the submit button
+        errors={orderErrors}
+        order={completeOrder[0]}    //Sends the formsErrors as errors to be able to log the errors near the submit button
       /> 
       </Route>
       <Route path="/pizza">
-        <Pizza /> 
+        <Pizza order={completeOrder[0]}/> 
       </Route>
         <Route path="/">
         <Home />

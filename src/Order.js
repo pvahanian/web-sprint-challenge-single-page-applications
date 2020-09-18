@@ -1,29 +1,17 @@
-import React, { useState, useEffect } from 'react';
-
-import { Route, Link, Switch } from "react-router-dom";
+import React, { useState } from 'react';
+import {Link,Route} from "react-router-dom";
 import Pizza from "./Pizza";
-
-// Delete 6 thru 15 once all props are being brought in
-
-// const onChange=null;
-// const errors={
-//     size:"REQUIRED!",
-//     name:"REQUIRED!"
-// }
-// const disabled= null;
-
-
-
-
+import { Redirect } from 'react-router';
 
 const Order = (props) => {
 
+    const [redirect, setRedirect] = useState(false)
 
-    const {disabled,values, submit,change,errors} = props
-    console.log(errors)
+    const {disabled,values, submit,change,errors,order} = props
 const onSubmit = evt => {
     evt.preventDefault()
     submit()
+    setRedirect(true)
 }
 
 const onChange = evt => { //If the value of the target (typed or selected) changes send it to the change function to update state
@@ -33,7 +21,7 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
 }
 
     return (
-    <div className="container">
+    <form className='form container' onSubmit={onSubmit}> 
     <div className="orderTaker">
     <h2>Build your own Pizza</h2>
     <div className="orderform">
@@ -55,9 +43,9 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
             {/* 🔥 Size dropdown*/}
             <select name='size' value={values.size} onChange={onChange}>
                 <option value="">-- select Size --</option>
-                <option value="small">Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
             </select>
             </label>
     </div>
@@ -113,7 +101,10 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
             </label> 
     
         <div  className='submit'>
-        <button disabled={disabled} id='submitBtn'>Submit</button> 
+     
+        
+       <button disabled={disabled} id='submitBtn'>Submit</button>
+       
         </div>
 
 
@@ -123,19 +114,22 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
     <h3>Name {values.name}</h3>
     <h3>Size {values.size}</h3>
     <h3>Toppings {values.cheese 
-                 ?" Extra Cheese ":" "
-                 }
-                 {values.pineapple 
-                 ?" Pineapple ":" "
-                 }{values.peppers 
-                 ?" Peppers ":" "
-                 }{values.mushrooms 
-                 ?" Mushrooms ":" "
-                 }</h3>
+        ?" Extra Cheese ":" "
+        }
+        {values.pineapple 
+        ?" Pineapple ":" "
+        }{values.peppers 
+        ?" Peppers ":" "
+        }{values.mushrooms 
+        ?" Mushrooms ":" "
+        }</h3>
     <h3>Special Instructions {values.special}</h3>
-    </div>    
+    <Link to ='/pizza'>Click to see Completed Order</Link>
     </div>
    
+    </form>
+  
+  
 
 
 );
@@ -143,4 +137,11 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
 };
 export default Order;
 
-
+// {redirect
+//     ?
+//     <Redirect push to="/pizza" />
+//     : ""
+//     }  
+//     <Route path="/pizza">
+//     <Pizza order={order}/> 
+//     </Route>
