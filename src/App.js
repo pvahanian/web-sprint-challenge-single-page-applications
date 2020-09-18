@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Link, Switch,useHistory } from "react-router-dom";
 import Pizza from "./Pizza";
 import Order from './Order'
 import schema from './Validator'
@@ -28,7 +28,12 @@ const intialErrors = {
 const initialDisabled = true 
 const testEmpty=[]
 
+
+
+
 const App = () => {
+  const history = useHistory();
+
   const [completeOrder, setCompleteOrder] = useState(testEmpty)
   const [order, setOrder] = useState(intialOrder) 
   const [orderErrors, setOrderErrors] = useState(intialErrors) 
@@ -39,6 +44,7 @@ const App = () => {
       .then(res => {
       setCompleteOrder([...completeOrder, res.data]) 
       setOrder(intialOrder)
+      history.push('/pizza')
       })
       .catch(err => {
       })

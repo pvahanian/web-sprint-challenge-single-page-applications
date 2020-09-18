@@ -67,7 +67,7 @@ describe('Pizza app', () => {
         mushroomsInput()
         .should('exist')
         .should('have.value','false')
-        .type('true')
+        .check()
 
         sizeInput()
         .should('exist')

@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import {Link,Route} from "react-router-dom";
+import React, { useState, useEffect} from 'react';
+import {Link,Route,useHistory} from "react-router-dom";
 import Pizza from "./Pizza";
 import { Redirect } from 'react-router';
 
 const Order = (props) => {
 
     const [redirect, setRedirect] = useState(false)
-
     const {disabled,values, submit,change,errors,order} = props
 const onSubmit = evt => {
     evt.preventDefault()
     submit()
-    setRedirect(true)
+   
 }
 
 const onChange = evt => { //If the value of the target (typed or selected) changes send it to the change function to update state
@@ -19,6 +18,13 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
     const valueToUse = type === 'checkbox'? checked : value // this checks to see if the type=checkbox type then send checked else send value
     change(name, valueToUse) 
 }
+const history = useHistory();
+
+useEffect( () => { 
+    if(values.pineapple===true){
+        history.push('-1')
+    }
+},[values.pineapple])
 
     return (
     <form className='form container' onSubmit={onSubmit}> 
@@ -104,7 +110,11 @@ const onChange = evt => { //If the value of the target (typed or selected) chang
      
         
        <button disabled={disabled} id='submitBtn'>Submit</button>
-       
+        {
+            
+        }
+
+
         </div>
 
 
@@ -145,3 +155,4 @@ export default Order;
 //     <Route path="/pizza">
 //     <Pizza order={order}/> 
 //     </Route>
+//     onClick={() => history.push('/pizza')}
